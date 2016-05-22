@@ -19,7 +19,7 @@ for further details on getting started with ruby check out
 <ul>
 <li>Simply clone this repo</li>
 <li>Navigate to the Student-directory folder in terminal</li>
-<li>In terminal Type 'Student-directory.rb' without the quotes</li>
+<li>In terminal Type 'directory.rb' without the quotes</li>
 <li>follow the instructions</li>
 </ul> 
 
