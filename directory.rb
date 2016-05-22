@@ -1,26 +1,46 @@
 @students = []
 
-def print_header
-  puts "The students of my cohort at Makers Academy"
-  puts "-------------"
+
+def welcome
+  puts "\e[H\e[2J"
+puts " "
+         msg = "Welcome to student directory!".center(70)
+
+  3.times do
+  print "\r#{ msg }"
+  sleep 0.5
+  print "\r#{ ' ' * msg.size }" # Send return and however many spaces are needed.
+  sleep 0.5
+end
+ 
+  puts " "
+  puts " "
+
+
 end
 
-def print_students_list
-  @students.each do |student|
-    puts "#{student[:name]} (#{student[:cohort]} cohort)"
-  end
-end
 
-def print_footer    
-  puts "Overall, we have #{@students.length} great students"
-end
 
-def add_student(name, cohort)
-    @students << {:name => name.capitalize, :cohort => cohort}    
+def print_menu 
+puts " " 
+  puts " "
+  puts "1. Input the students ".center(79)
+
+  puts "2. Show the students".center(77)
+  
+  puts "3. Save the list to students.csv".center(89)
+  
+  puts "4. Load the list from students.csv".center(90)
+  puts "9. Exit".center(64) # 9 because we'll be adding more items  
+  
 end
 
 def input_students
-  puts "Please enter the names of the students"
+  puts "\e[H\e[2J"
+  p
+  puts "Please enter the name of a student"
+  puts "To Save the name hit enter ONCE"
+  puts "repeat for each name"
   puts "To finish, just hit return twice"
   # get the first name
   name = gets.chomp
@@ -28,19 +48,15 @@ def input_students
   while !name.empty? do    
     # add the student hash to the array
     add_student(name, :august)
-    puts "Now we have #{@students.length} students"
+    puts " "
+    puts
+    puts "Overall we have #{@students.length} student#{'s' if @students.length > 1}"
+
     # get another name from the user
     name = gets.chomp
   end
 end
 
-def print_menu    
-  puts "1. Input the students"
-  puts "2. Show the students"
-  puts "3. Save the list to students.csv"
-  puts "4. Load the list from students.csv"
-  puts "9. Exit" # 9 because we'll be adding more items  
-end
 
 def show_students
   print_header
@@ -48,21 +64,69 @@ def show_students
   print_footer
 end
 
-
-def load_students
-  file = File.open("students.csv", "r")
-  file.readlines.each do |line| 
-    name, cohort = line.chomp.split(',')
-    add_student(name, cohort)
-  end
-  file.close
-  puts "The names have been loaded from students.csv"
-  puts""
+def print_header
+  print 'The students of my cohort at Makers Academy'.center(80)
+  puts " "
+  puts '---------------------------------------'.center(80)
+  puts " "
 end
 
 
-def save_students
-  file = File.open("students.csv","w")
+def print_students_list
+  @students.each do |student|
+    puts "#{student[:name]} (#{student[:cohort]} cohort)".center(80)
+  end
+end
+
+def print_footer  
+t = Time.new
+puts "=======================================".center(80) 
+print "#{t.strftime ("As of %Y-%m")}, we have #{@students.length} great students".center(80)
+puts " "
+puts "=======================================".center(80)    
+end
+
+def add_student(name, cohort)
+    @students << {:name => name, :cohort => cohort}    
+end
+
+
+
+
+
+
+def times
+  t = Time.new
+end
+
+def load_students(filename = "students.csv")
+  file = File.open("students.csv", "r")
+  file.readlines.each do |line| 
+    name, cohort = line.chomp.split(',')
+    add_student(name, :august)
+  end
+  file.close
+  puts ""
+       msg = 'Loading from students.csv'.center(74)
+
+  3.times do
+  print "\r#{ msg }"
+  sleep 0.5
+  print "\r#{ ' ' * msg.size }" # Send return and however many spaces are needed.
+  sleep 0.5
+end
+t = Time.new
+puts " "
+  puts "Loaded from students.csv at #{t.strftime ("As of %Y-%m")}".center(80)
+  puts ""
+  show_students
+  puts " " 
+
+end
+
+
+def save_students 
+  file = File.open("students.csv", "w")
 
   @students.each do |student|
     student_data = [student[:name], student[:cohort]]
@@ -70,9 +134,26 @@ def save_students
     file.puts csv_line
   end
   file.close
-  puts "The names have been saved to students.csv"
+
+  puts " " 
+     msg = 'Saving to students.csv'.center(64)
+
+3.times do
+  print "\r#{ msg }"
+  sleep 0.5
+  print "\r#{ ' ' * msg.size }" # Send return and however many spaces are needed.
+  sleep 0.5
+end
+t = Time.new
+puts " "
+  puts "Saved to students.csv at #{t.strftime ("As of %Y-%m")}".center(80)
+  puts " "
+  puts " "
 end
   
+def clearPP
+puts "\e[H\e[2J"
+end
 
 def process(selection)
   case selection
@@ -81,26 +162,60 @@ def process(selection)
     input_students
 
   when "2"
+    puts "\e[H\e[2J"
     show_students
 
   when "3"
+    puts "\e[H\e[2J"
    save_students
+
 when "4"
+  puts "\e[H\e[2J"
   load_students
 
 
   when "9"
-    exit
+    puts "\e[H\e[2J"
+exit
+
   else
-    puts "I don't know what you mean, try again"
+    msg = 'I dont know what you mean, try again!!'.center(74)
+
+2.times do
+  print "\r#{ msg }"
+  sleep 0.5
+  print "\r#{ ' ' * msg.size }" # Send return and however many spaces are needed.
+  sleep 0.5
+end
+puts " "
+    print "Please choose from the given parameters listed below!!".center(74)
+    puts ""
+    puts ""
+  end
+end
+
+def try_load_students
+  t = Time.new
+  filename = ARGV.first
+  return if filename.nil?
+  if File.exists?(students.csv)
+    load_students(students.csv)
+    puts "Loaded #{@students.length} from #{students.csv}".center(74)
+  else
+
+  puts "Sorry, #{students.csv} dosen't exist!!!!".center(74)
+
+  exit 
   end
 end
 
 def interactive_menu  
   loop do
     print_menu        
-    process(gets.chomp)
+    process(STDIN.gets.chomp)
   end
 end
 
+welcome
+try_load_students
 interactive_menu
