@@ -1,9 +1,9 @@
 <h1>Student-directory</h1>
 
-<p>This simple .rb program is used to add the names of fellow
+<p>This simple .rb script is used to add the names of fellow
 students of my cohort at Makers Academy.<p>
 
-<p>To use this program you need to have Ruby installed on your machine,
+<p>To use this script you need to have Ruby installed on your machine,
 for further details on getting started with ruby check out
 <a href='https://www.ruby-lang.org/en/documentation/quickstart/'>www.ruby-lang.org</a></p>
 
