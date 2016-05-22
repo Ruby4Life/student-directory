@@ -13,6 +13,7 @@ for further details on getting started with ruby check out
   <li>Git Hub</li>
   <li>Ruby '2.2.2'</li>
   <li>Terminal</li>
+  <li>Sublime Text</li> 
 </ul>
 
 <h2>Getting started</h2>
@@ -20,7 +21,7 @@ for further details on getting started with ruby check out
 <li>Simply clone this repo</li>
 <li>Navigate to the Student-directory folder in terminal</li>
 <li>In terminal Type 'ruby directory.rb' without the quotes</li>
-<li>follow the instructions</li>
+<li>Follow the on screen instructions</li>
 </ul> 
 
 
